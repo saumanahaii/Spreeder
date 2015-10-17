@@ -1,0 +1,36 @@
+html {
+  background-color: #FFCC99;
+
+}
+
+h1, h2 {
+  text-align: center;
+
+}
+
+textarea {
+  background-color: #C2FFFF;
+
+}
+
+button {
+  background-color: #CCA37A;
+  border: solid grey 1px;
+  height: 50px;
+  font-size: 30px;
+
+}
+
+.full {
+  width: 100%;
+
+}
+
+.spreederBox {
+  display: inline-block;
+  border: solid 1px;
+  width: 200px;
+  font-size: 24px;
+  text-align: center;
+  margin: 2px;
+}

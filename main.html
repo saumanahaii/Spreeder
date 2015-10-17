@@ -2,13 +2,19 @@
 <html>
   <header>
     <script src ="js/knockout.js"></script>
-    <script src="js/app.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" href="css/css.css">
   </header>
   <body>
-    <textarea>Paste what you want to speed read here!</textarea>
-    <button>Spreed it!</button>
+    <h1>SPREEDER</h1>
+    <h2>The speed reading app</h2>
+    <textarea class="full" data-bind="value: textAreaString"></textarea>
+    <button class="full" data-bind="click: updateString">Spreed it!</button>
     <div id="SpreedBody">
+      <div data-bind="foreach: spreederArray">
+        <span class="spreederBox" data-bind="text: currentWord, style: {background: theColor}"></span>
+      </div>
     </div>
   </body>
 </html>
