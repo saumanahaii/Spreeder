@@ -9,7 +9,6 @@ $(document).ready(function(){
     //this is the spreedBox element.  Each one has an array of words,
     //a color array and a default color position
     var spreedBox = {
-      colors: ["#99FFCC", "#6AE6B8"]
     }
 
     //processes each sentence into an array with three words each
@@ -54,11 +53,6 @@ $(document).ready(function(){
           var boxArray = current[e];
           var theBox = Object.create(spreedBox);
           theBox.words = boxArray;
-          if (e % 2 != 0){
-            theBox.theColor =  ko.observable(theBox.__proto__.colors[0]);
-          } else {
-            theBox.theColor = ko.observable(theBox.__proto__.colors[1]);
-          }
           theBox.currentWord = ko.observable(theBox.words[0]);
           spreederArray.push(theBox);
         }
@@ -66,6 +60,7 @@ $(document).ready(function(){
         //spreederArray().push("break");
       }
       console.log(spreederArray());
+
     }
 
 
@@ -73,35 +68,41 @@ $(document).ready(function(){
     this.updateString= function(){
       theString(textAreaString());
       this.makeBoxes();
+      $(".spreederBox:nth-child(even)").addClass("spreederColor1");
+      $(".spreederBox:nth-child(odd)").addClass("spreederColor2");
 
     }
 
-    //the code that controls the intervals
-    var currentCount = 0
-    setInterval(function(){
-      for (i=0;i<spreederArray().length;i++){
-        spreederArray()[i].currentWord(spreederArray()[i].words[currentCount])
-        if (spreederArray()[i].currentWord() == null){
-          spreederArray()[i].currentWord("_")
-        }
-      }
-      currentCount +=1;
-      if(currentCount >=3){
-        for (i=0;i<spreederArray().length-1;i++){
-          if (spreederArray()[i].theColor() == spreederArray()[i].__proto__.colors[0]){
-            spreederArray()[i].theColor(spreederArray()[i].__proto__.colors[1]);
-          }
-          else {
-            spreederArray()[i].theColor(spreederArray()[i].__proto__.colors[0]);
-          }
-        }
-        currentCount = 0;
-      }
-    }, 300);
 
     this.makeBoxes();
+
   }
 
-ko.applyBindings(new AppViewModel());
+  ko.applyBindings(new AppViewModel());
+  //This is necessary to initially set the colors for the default string.
+  $(".spreederBox:nth-child(even)").addClass("spreederColor1");
+  $(".spreederBox:nth-child(odd)").addClass("spreederColor2");
+
+  //the code that controls the intervals
+  var currentCount = 0
+  setInterval(function(){
+    for (i=0;i<spreederArray().length;i++){
+      spreederArray()[i].currentWord(spreederArray()[i].words[currentCount])
+      if (spreederArray()[i].currentWord() == null){
+        spreederArray()[i].currentWord("_")
+      }
+    }
+    currentCount +=1;
+    if(currentCount >=3){
+        $color1Boxes = $(".spreederColor1");
+        $color2Boxes = $(".spreederColor2");
+        $color1Boxes.addClass("spreederColor2");
+        $color1Boxes.removeClass("spreederColor1");
+        $color2Boxes.addClass("spreederColor1");
+        $color2Boxes.removeClass("spreederColor2");
+
+        currentCount = 0;
+    }
+  }, 300);
 
 });

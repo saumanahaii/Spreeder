@@ -12,8 +12,8 @@
     <textarea class="full" data-bind="value: textAreaString"></textarea>
     <button class="full" data-bind="click: updateString">Spreed it!</button>
     <div id="SpreedBody">
-      <div data-bind="foreach: spreederArray">
-        <span class="spreederBox" data-bind="text: currentWord, style: {background: theColor}"></span>
+      <div class="spreederContainer" data-bind="foreach: spreederArray">
+        <span class="spreederBox" data-bind="text: currentWord"></span>
       </div>
     </div>
   </body>
